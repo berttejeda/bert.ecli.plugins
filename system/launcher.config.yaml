@@ -1,0 +1,3 @@
+utilities:
+  win32:
+    cred-mgr: control /name Microsoft.CredentialManager
