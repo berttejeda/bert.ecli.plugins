@@ -1,7 +1,7 @@
 import argparse
 from ecli.lib.dictutils import DictUtils
 import os
-from ecli.lib.superduperconfig import SuperDuperConfig 
+from bertdotconfig import Config
 import sys
 
 __docstring__ = 'Launch System Utilities'
@@ -25,10 +25,8 @@ try:
 except NameError:
 	script_dir = os.path.dirname(os.path.abspath(__file__))
 config_file = os.path.abspath(os.path.join(script_dir, 'launcher.config.yaml'))
-# Initialize Config Module
-superconf = SuperDuperConfig(config_path=config_file)
-# Initialize App Config
-config = superconf.load_config()
+# Initialize Config
+config = Config(config_file_uri=config_file).read()
 # Dictutil
 dictutil = DictUtils()
 system_utilities = dictutil.deep_get(config, 'utilities')

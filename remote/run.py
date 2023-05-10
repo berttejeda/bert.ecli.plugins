@@ -13,7 +13,7 @@ import sys
 # Import third-party and custom modules
 from ecli.lib.dictutils import DictUtils
 from ecli.lib.proc.remote_cli_provider import RemoteCLIProvider
-from ecli.lib.superduperconfig import SuperDuperConfig
+from bertdotconfig import Config
 from ecli.lib.logger import Logger
 
 # Setup Logging
@@ -49,9 +49,9 @@ def parse_args():
       help="R|Remote command to execute, e.g.\n"
           "* Run command, specifying remote host (remote path defaults to CWD)\n"
           "  example 1:\n"
-          "    ecli remote.run -H myremote-host.mydomain.local --- ansible-playbook -i localhost, myplaybook.yaml\n"
+          "    ecli remote.run -H myhost.example.local --- ansible-playbook -i localhost, myplaybook.yaml\n"
           "  example 2:\n"
-          "    ecli remote.run -H myremote-host.mydomain.local --- myscript.sh\n"
+          "    ecli remote.run -H myhost.example.local --- myscript.sh\n"
           "* Specify config file with connection settings\n"
           "  example 1:\n"
           "    ecli remote.run -f remote-config.yaml --- ansible-playbook -i localhost, myplaybook.yaml\n"
@@ -86,8 +86,8 @@ except NameError:
 if not args.sftp_config:
   logger.debug('No config file specified')
 config_file = args.sftp_config or os.path.abspath(os.path.join(script_dir, 'remote-config.yaml'))
-# Initialize App Config
-settings = Config(config_file_uri=config_file).read()
+# Initialize Config
+settings = config = Config(config_file_uri=config_file).read()
 remote_command = re.sub('[A-Z]:','',remote_command)
 remote_command = remote_command.replace('/Users/%s' % username,'~')
 remote_command = remote_command.replace('/users/%s' % username,'~')
