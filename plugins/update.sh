@@ -67,7 +67,7 @@ if test -d "${plugin_path}";then
 	    sleep 1
 	    read -t 60 answer
 	fi
-    if [[ ${answer,,} =~ ^y ]];then
+    if [[ ${answer:l} =~ ^y ]];then
 		echo "Updating plugins for ${plugin_path}"
 		cd "${plugin_path}"
 		git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
