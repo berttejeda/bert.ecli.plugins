@@ -533,7 +533,7 @@ class GitSubmodule:
             )
 
             git_process = subprocess.Popen(
-                ['git', '-c advice.detachedHead=false', 'clone', source, self.get_path()],
+                ['git', '-c', 'advice.detachedHead=false', 'clone', source, self.get_path()],
                 cwd = root_dir
             )
 
